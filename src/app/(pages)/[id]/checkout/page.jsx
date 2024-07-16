@@ -97,14 +97,14 @@ const CheckoutPage = ({ params }) => {
       const name = userData ? userData.name : ''; // Fetch from user data if available
       const email = userData ? userData.email : ''; // Fetch from user data if available
       const phone = ''; // Replace with actual phone number logic if needed
-
+  
       const response = await axios.post('https://server-api-green.vercel.app/api/createOrder', {
         amount: courseData.salePrice * 100, // Amount in paisa (e.g., ₹100 = 10000 paisa)
         currency: 'INR', // Adjust based on your currency
         receipt: 'receipt#1', // Replace with your own receipt logic
         notes: { name, email, phone } // Use defined variables
       });
-
+  
       const { data } = response;
       const options = {
         key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID, // Use the environment variable directly
@@ -116,7 +116,7 @@ const CheckoutPage = ({ params }) => {
         image: 'https://via.placeholder.com/150', // Replace with your logo URL
         handler: async function (response) {
           console.log('Payment success:', response);
-      
+  
           // Save payment details in Firestore under user's document
           const userCourseRef = doc(collection(db, 'users', user.uid, 'courses'), response.razorpay_order_id);
           await setDoc(userCourseRef, {
@@ -128,7 +128,7 @@ const CheckoutPage = ({ params }) => {
             signature: response.razorpay_signature,
             date: new Date()
           });
-      
+  
           toast.success('Payment successful! Course access granted.', { autoClose: 3000 });
         },
         prefill: {
@@ -143,7 +143,7 @@ const CheckoutPage = ({ params }) => {
           color: '#61dafb'
         }
       };
-
+  
       const paymentObject = new window.Razorpay(options);
       paymentObject.open();
     } catch (error) {
@@ -151,6 +151,7 @@ const CheckoutPage = ({ params }) => {
       toast.error('Payment failed. Please try again.', { autoClose: 3000 });
     }
   };
+  
 
   useEffect(() => {
     const script = document.createElement('script');
