@@ -151,7 +151,6 @@ const CheckoutPage = ({ params }) => {
       toast.error('Payment failed. Please try again.', { autoClose: 3000 });
     }
   };
-  
 
   useEffect(() => {
     const script = document.createElement('script');
