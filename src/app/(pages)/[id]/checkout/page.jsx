@@ -1,3 +1,5 @@
+'use client'
+
 import React, { useState, useEffect } from 'react';
 import { auth, db } from '../../../../utils/Firebase/firebaseConfig'; // Adjust path as per your project structure
 import { useAuthState } from 'react-firebase-hooks/auth';
