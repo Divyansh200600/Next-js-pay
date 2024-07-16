@@ -1,4 +1,4 @@
-'use client'
+'use client';
 
 import React, { useState, useEffect } from 'react';
 import { auth, db } from '../../../../utils/Firebase/firebaseConfig'; // Adjust path as per your project structure
@@ -98,8 +98,8 @@ const CheckoutPage = ({ params }) => {
       const email = userData ? userData.email : ''; // Fetch from user data if available
       const phone = ''; // Replace with actual phone number logic if needed
 
-      const response = await axios.post('https://server-api-seven.vercel.app/api/createOrder', {
-                amount: courseData.salePrice * 100, // Amount in paisa (e.g., ₹100 = 10000 paisa)
+      const response = await axios.post('https://server-api-green.vercel.app/api/createOrder', { // Changed port to 3001
+        amount: courseData.salePrice * 100, // Amount in paisa (e.g., ₹100 = 10000 paisa)
         currency: 'INR', // Adjust based on your currency
         receipt: 'receipt#1', // Replace with your own receipt logic
         notes: { name, email, phone } // Use defined variables
@@ -113,12 +113,12 @@ const CheckoutPage = ({ params }) => {
         order_id: data.id,
         name: 'PulseZest-Learning',
         description: 'Course Payment',
-        image: 'https://firebasestorage.googleapis.com/v0/b/pulsezest.appspot.com/o/2.png?alt=media&token=861cd93c-8d97-4ce5-b6e0-1de3dc4bd509', // Replace with your logo URL
+        image: 'https://via.placeholder.com/150', // Replace with your logo URL
         handler: async function (response) {
           console.log('Payment success:', response);
 
           // Save payment details in Firestore under user's document
-          const userCourseRef = doc(collection(db, 'users', user.uid, 'courses'), id);
+          const userCourseRef = doc(collection(db, 'users', user.uid, 'courses'), response.razorpay_order_id);
           await setDoc(userCourseRef, {
             courseId: id,
             amount: data.amount,
