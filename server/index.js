@@ -5,7 +5,7 @@ const cors = require('cors');
 require('dotenv').config();
 
 const app = express();
-const port = process.env.PORT || 3001; // Use environment port if provided
+const port = process.env.PORT || 3004; // Use environment port if provided
 
 // Initialize Razorpay with your key and secret
 const razorpay = new Razorpay({

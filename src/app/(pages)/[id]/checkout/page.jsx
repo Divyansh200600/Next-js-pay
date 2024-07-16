@@ -98,8 +98,8 @@ const CheckoutPage = ({ params }) => {
       const email = userData ? userData.email : ''; // Fetch from user data if available
       const phone = ''; // Replace with actual phone number logic if needed
 
-      const response = await axios.post('https://server-api-seven.vercel.app/api/createOrder', { // Changed port to 3001
-        amount: courseData.salePrice * 100, // Amount in paisa (e.g., ₹100 = 10000 paisa)
+      const response = await axios.post('https://server-api-seven.vercel.app/api/createOrder', {
+                amount: courseData.salePrice * 100, // Amount in paisa (e.g., ₹100 = 10000 paisa)
         currency: 'INR', // Adjust based on your currency
         receipt: 'receipt#1', // Replace with your own receipt logic
         notes: { name, email, phone } // Use defined variables
